@@ -1,0 +1,62 @@
+{
+    "name": "vscode-conduct",
+    "displayName": "vscode-conduct",
+    "description": "add code of conduct to your project",
+    "version": "0.0.1",
+    "publisher": "cg-cnu",
+    "engines": {
+        "vscode": "^1.17.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "author": {
+        "email": "sreenivas9alapati@gmail.com",
+        "name": "Sreenivas Alapati",
+        "url": "https://twitter.com/cgcnu"
+    },
+    "bugs": {
+        "email": "sreenivas9alapati@gmail.com",
+        "url": "https://github.com/cg-cnu/vscode-condut/issues"
+    },
+    "icon": "icons/conduct-128.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cg-cnu/vscode-condut.git"
+    },
+    "readme": "README.md",
+    "license": "MIT",
+    "keywords": [
+        "code",
+        "conduct",
+        "code of conduct",
+        "Contributor Covenant"
+    ],
+    
+    "homepage": "https://github.com/cg-cnu/vscode-condut",
+    "activationEvents": [
+        "onCommand:conduct.create"
+    ],
+    "main": "./out/conduct",
+    "contributes": {
+        "commands": [
+            {
+                "command": "conduct.create",
+                "title": "create conduct"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.5.3",
+        "vscode": "^1.1.5",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
