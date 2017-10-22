@@ -1,6 +1,6 @@
 {
-    "name": "vscode-conduct",
-    "displayName": "vscode-conduct",
+    "name": "vscode-add-conduct",
+    "displayName": "vscode-add-conduct",
     "description": "add code of conduct to your project",
     "version": "0.0.1",
     "publisher": "cg-cnu",
@@ -17,12 +17,12 @@
     },
     "bugs": {
         "email": "sreenivas9alapati@gmail.com",
-        "url": "https://github.com/cg-cnu/vscode-condut/issues"
+        "url": "https://github.com/cg-cnu/vscode-add-conduct/issues"
     },
-    "icon": "icons/conduct-128.png",
+    "icon": "icons/add-conduct-128.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cg-cnu/vscode-condut.git"
+        "url": "https://github.com/cg-cnu/vscode-add-conduct.git"
     },
     "readme": "README.md",
     "license": "MIT",
@@ -32,17 +32,16 @@
         "code of conduct",
         "Contributor Covenant"
     ],
-    
-    "homepage": "https://github.com/cg-cnu/vscode-condut",
+    "homepage": "https://github.com/cg-cnu/vscode-add-conduct",
     "activationEvents": [
-        "onCommand:conduct.create"
+        "onCommand:conduct.add"
     ],
     "main": "./out/conduct",
     "contributes": {
         "commands": [
             {
-                "command": "conduct.create",
-                "title": "☮️ Create code of conduct 🖖"
+                "command": "conduct.add",
+                "title": "☮️ Add code of conduct 🖖"
             }
         ]
     },

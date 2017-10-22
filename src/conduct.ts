@@ -12,7 +12,7 @@ const validateEmail = (email) => {
 
 export function activate(context: vscode.ExtensionContext) {
 
-    let create = vscode.commands.registerCommand('conduct.create', () => {
+    let add = vscode.commands.registerCommand('conduct.add', () => {
         const rootPath = vscode.workspace.rootPath;
         if (!rootPath) {
             return;
@@ -37,9 +37,9 @@ export function activate(context: vscode.ExtensionContext) {
                     vscode.window.showWarningMessage("Not a valid email address. Aborting!")
                     return;
                 }
-                let code = code_of_conduct;
-                code = code.replace('[INSERT EMAIL ADDRESS]', email);
-                writeFileSync(filePath, code, 'utf8');
+                let conduct = code_of_conduct;
+                conduct = conduct.replace('[INSERT EMAIL ADDRESS]', email);
+                writeFileSync(filePath, conduct, 'utf8');
                 vscode.workspace.openTextDocument(vscode.Uri.file(filePath))
                     .then((doc) => {
                         vscode.window.showTextDocument(doc);
@@ -47,5 +47,5 @@ export function activate(context: vscode.ExtensionContext) {
             });
     });
 
-    context.subscriptions.push(create);
+    context.subscriptions.push(add);
 }

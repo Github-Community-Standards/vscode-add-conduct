@@ -1,4 +1,4 @@
-const code: string = `# Contributor Covenant Code of Conduct
+const conduct: string = `# Contributor Covenant Code of Conduct
 
 ## Our Pledge
 
@@ -72,4 +72,4 @@ available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.ht
 
 [homepage]: https://www.contributor-covenant.org
 `
-export default code;
+export default conduct;
