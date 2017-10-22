@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/2767425/31855743-d524fdbc-b6ce-11e7-92a8-41aff6ecdd1b.png"/>
+  <img src="https://user-images.githubusercontent.com/2767425/31861721-a5da8726-b74f-11e7-97ad-a1f8d5d0b513.png"/>
   <h1 align="center">Conduct</h1>
   <h4 align="center">Add code of conduct to your project</h4>
   <br>
