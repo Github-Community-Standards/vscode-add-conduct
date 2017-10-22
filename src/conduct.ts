@@ -5,11 +5,21 @@ import { join } from 'path';
 import code_of_conduct from './codeOfConduct';
 const { execSync } = require('child_process');
 
+const validateEmail = (email) => {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 export function activate(context: vscode.ExtensionContext) {
 
     let create = vscode.commands.registerCommand('conduct.create', () => {
         const rootPath = vscode.workspace.rootPath;
         if (!rootPath) {
+            return;
+        }
+        const filePath = join(rootPath, 'CODE_OF_CONDUCT.md');        
+        if (existsSync(filePath)) {
+            vscode.window.showWarningMessage("File 'CODE_OF_CONDUCT.md' already exists. Aborting!")
             return;
         }
         const email = execSync("git config --global user.email").toString().trim();
@@ -23,16 +33,12 @@ export function activate(context: vscode.ExtensionContext) {
                 if (!email) {
                     return;
                 }
-                // FIXME: noticed by admin @ 2017-10-22 01:08:36
-                // validate the email
-                let code = code_of_conduct;
-                code = code.replace('[INSERT EMAIL ADDRESS]', email);
-                // write it to the current root path
-                const filePath = join(rootPath, 'code_of_conduct.md');
-                if (existsSync(filePath)) {
-                    vscode.window.showWarningMessage("File 'code_of_conduct.md' already exists. Aborting!")
+                if(!validateEmail(email)){
+                    vscode.window.showWarningMessage("Not a valid email address. Aborting!")
                     return;
                 }
+                let code = code_of_conduct;
+                code = code.replace('[INSERT EMAIL ADDRESS]', email);
                 writeFileSync(filePath, code, 'utf8');
                 vscode.workspace.openTextDocument(vscode.Uri.file(filePath))
                     .then((doc) => {
