@@ -6,8 +6,9 @@
 </p>
 
  ## Demo:
-
-<img src=""></img>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/2767425/31948328-3d2afde0-b8f4-11e7-9c45-1188d8d6bac6.gif" height=400></img>
+</p>
 
 ## Inspiration:
 * [contributor covenant](https://www.contributor-covenant.org/)

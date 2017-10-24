@@ -1,8 +1,8 @@
 {
     "name": "vscode-add-conduct",
-    "displayName": "vscode-add-conduct",
-    "description": "add code of conduct to your project",
-    "version": "0.0.1",
+    "displayName": "Add Conduct",
+    "description": "Easily add code of conduct to your project",
+    "version": "0.0.2",
     "publisher": "cg-cnu",
     "engines": {
         "vscode": "^1.17.0"
