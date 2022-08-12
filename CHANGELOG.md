@@ -4,4 +4,8 @@ All notable changes to the "vscode-add-conduct" extension will be documented in 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
-- Initial release
+
+
+## Initial release
+### Changed
+- Updated Contributor Convenant to version 2.1
