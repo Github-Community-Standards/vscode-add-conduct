@@ -7,7 +7,7 @@ const { execSync } = require('child_process');
 
 export function activate(context: vscode.ExtensionContext) {
 
-    let add = vscode.commands.registerCommand('conduct.add', () => {
+    let add = vscode.commands.registerCommand('codeOfConduct.add', () => {
         const rootPath = vscode.workspace.rootPath;
         if (!rootPath) {
             return;
@@ -28,7 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
                 if (!email) {
                     return;
                 }
-                
+
                 let conduct = code_of_conduct;
                 conduct = conduct.replace('[INSERT EMAIL ADDRESS]', email);
                 writeFileSync(filePath, conduct, 'utf8');
