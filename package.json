@@ -34,13 +34,13 @@
     ],
     "homepage": "https://github.com/kjaymiller/vscode-add-conduct",
     "activationEvents": [
-        "onCommand:conduct.add"
+        "onCommand:codeOfConduct.add"
     ],
     "main": "./out/conduct",
     "contributes": {
         "commands": [
             {
-                "command": "conduct.add",
+                "command": "codeOfConduct.add",
                 "title": "Add Code of Conduct to Your Project"
             }
         ]
@@ -52,7 +52,7 @@
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
-    "dependencies": {
+    "devDependencies": {
         "@types/node": "^18.7.2",
         "typescript": "^4.7.4",
         "vscode": "^1.1.37"
