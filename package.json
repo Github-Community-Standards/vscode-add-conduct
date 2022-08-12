@@ -1,38 +1,38 @@
 {
-    "name": "vscode-add-conduct",
-    "displayName": "Add Conduct",
-    "description": "Easily add code of conduct to your project",
-    "version": "0.0.2",
-    "publisher": "cg-cnu",
+    "name": "vscode-add-code-of-conduct",
+    "displayName": "Add Code of Conduct",
+    "description": "Add a Code of Conduct to your repository",
+    "version": "2022.8.0",
+    "publisher": "kjaymiller",
     "engines": {
         "vscode": "^1.17.0"
     },
     "categories": [
-        "Other"
+        "Snippets"
     ],
     "author": {
-        "email": "sreenivas9alapati@gmail.com",
-        "name": "Sreenivas Alapati",
-        "url": "https://twitter.com/cgcnu"
+        "email": "kjaymiller@gmail.com",
+        "name": "Jay Miller",
+        "url": "https://kjaymiller.com"
     },
     "bugs": {
-        "email": "sreenivas9alapati@gmail.com",
-        "url": "https://github.com/cg-cnu/vscode-add-conduct/issues"
+        "email": "kjaymiller@gmail.com",
+        "url": "https://github.com/kjaymiller/vscode-add-conduct/issues"
     },
-    "icon": "icons/add-conduct-128.png",
+    "icon": "icons/vscode-add-coc.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cg-cnu/vscode-add-conduct.git"
+        "url": "https://github.com/kjaymiller/vscode-add-conduct.git"
     },
     "readme": "README.md",
     "license": "MIT",
     "keywords": [
-        "code",
+        "coc"
         "conduct",
         "code of conduct",
         "Contributor Covenant"
     ],
-    "homepage": "https://github.com/cg-cnu/vscode-add-conduct",
+    "homepage": "https://github.com/kjaymiller/vscode-add-conduct",
     "activationEvents": [
         "onCommand:conduct.add"
     ],
@@ -41,7 +41,7 @@
         "commands": [
             {
                 "command": "conduct.add",
-                "title": "☮️ Add code of conduct 🖖"
+                "title": "Add Code of Conduct to Your Project"
             }
         ]
     },
