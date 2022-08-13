@@ -47,12 +47,12 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run esbuild-base -- --minify",
-        "esbuild-base": "esbuild ./src/main.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+        "esbuild-base": "esbuild ./src/main.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node && cp -R src/codesOfConduct/ ./out/codesOfConduct",
         "esbuild": "npm run esbuild-base -- --sourcemap",
         "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-        "test-compile": "tsc -p ./",
+        "test-compile": "tsc -p ./ && cp -R src/codesOfConduct ./out/codesOfConduct",
         "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
+        "watch": "tsc -watch -p ./ && cp -R src/codesOfConduct ./out/codesOfConduct",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
