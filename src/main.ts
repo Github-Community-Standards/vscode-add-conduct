@@ -6,22 +6,35 @@ import {existsSync, writeFileSync, readFileSync} from 'fs';
 import { join } from 'path';
 const { execSync } = require('child_process');
 
-function getPlaceHolders(text:string){
+const regexFinder:RegExp = /\[[A-Z_ ]+\](?!\(http)/g;
+
+function getPlaceHolders (text:string) : Set<string> {
     let placeholders = [];
-    let regex = /\[[A-Z_]+\]/g;
-    let match = regex.exec(text);
-    while (match != null) {
-        placeholders.push(match[1]);
-        match = regex.exec(text);
+    let match = text.match(regexFinder);
+    if (match){
+        for (let m of match){
+            placeholders.push(m);
+        }
     }
-    return placeholders;
+    return new Set(placeholders);
 }
 
-export function activate(context: vscode.ExtensionContext) {
+export function showInputBox(placeholder:string, fileText:any) {
+    let prompt = placeholder.replace('[', '').replace(']', '');
+    return vscode.window.showInputBox({
+		value: placeholder,
+		placeHolder: prompt,
+	}).then((item) => {
+        if (item) {
+        let swap = new RegExp(item, 'g')
+        fileText.replace(swap, fileText);
+        }
+    })}
 
+export async function activate(context: vscode.ExtensionContext) {
     console.log('Calling Add Code of Conduct');
 
-    let add = vscode.commands.registerCommand('codeOfConduct.add', () => {
+    let add = vscode.commands.registerCommand('codeOfConduct.add', async () => {
         const rootPath = vscode.workspace.rootPath;
         if (!rootPath) {
             return;
@@ -33,14 +46,20 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        const template = vscode.window.showQuickPick(manifest, {
-            }).then((item) => {
-                var msg = item?.body? readFileSync(join(__dirname, item.body), 'utf8'):console.log("No item selected")
-                if (msg) {
-                    console.log(getPlaceHolders(msg))
-                }
-            })
-        });
+        const msg = await vscode.window.showQuickPick(manifest, {}).then((item) => {
+                return item?.body? readFileSync(join(__dirname, item.body), 'utf8'):console.log("No item selected")
+            });  
+        
+        if (msg) {
+        const placeholders = getPlaceHolders(msg)
+                console.log(placeholders)
+                placeholders?.forEach(
+                    (p) => {
+                        showInputBox(p, msg)
+                        vscode.window.showInformationMessage("File 'CODE_OF_CONDUCT.md' created successfully!")
+                        });
+                    }
+            });
  /*       const email = execSync("git config --global user.email").toString().trim();
         vscode.window.showInputBox({
             ignoreFocusOut: true,
