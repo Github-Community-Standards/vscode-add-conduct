@@ -4,6 +4,7 @@ import manifest from './manifest';
 
 import {existsSync, writeFileSync, readFileSync} from 'fs';
 import { join } from 'path';
+import { isBoxedPrimitive } from 'util/types';
 const { execSync } = require('child_process');
 
 const regexFinder:RegExp = /\[[A-Z_ ]+\](?!\(http)/g;
@@ -21,21 +22,18 @@ function getPlaceHolders (text:string) : Set<string> {
 
 export function showInputBox(placeholder:string, fileText:any) {
     let prompt = placeholder.replace('[', '').replace(']', '');
-    return vscode.window.showInputBox({
-		value: placeholder,
-		placeHolder: prompt,
-	}).then((item) => {
-        if (item) {
-        let swap = new RegExp(item, 'g')
-        fileText.replace(swap, fileText);
-        }
-    })}
+    return vscode.window.showInputBox(
+        {
+        title: prompt,
+        placeholder: prompt,
+        },); 
+}
 
 export async function activate(context: vscode.ExtensionContext) {
     console.log('Calling Add Code of Conduct');
 
     let add = vscode.commands.registerCommand('codeOfConduct.add', async () => {
-        const rootPath = vscode.workspace.rootPath;
+        const rootPath = vscode.workspace.workspaceFolders;
         if (!rootPath) {
             return;
         }
@@ -51,12 +49,11 @@ export async function activate(context: vscode.ExtensionContext) {
             });  
         
         if (msg) {
-        const placeholders = getPlaceHolders(msg)
-                console.log(placeholders)
-                placeholders?.forEach(
-                    (p) => {
+        const placeholders = await getPlaceHolders(msg)
+        console.log(placeholders)
+        placeholders?.forEach(p => {
                         showInputBox(p, msg)
-                        vscode.window.showInformationMessage("File 'CODE_OF_CONDUCT.md' created successfully!")
+                        vscode.window.showInformationMessage(p + "successfully updated!")
                         });
                     }
             });
