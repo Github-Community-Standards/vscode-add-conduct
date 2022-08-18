@@ -3,12 +3,12 @@ import * as vscode from 'vscode';
 import manifest from './manifest';
 
 import { existsSync, writeFileSync, readFileSync } from 'fs';
-import { format, join } from 'path';
-const { execSync } = require('child_process');
+import { join } from 'path';
+
 
 function getPlaceHolders(text: string) {
     let placeholders = [];
-    let regex = /\[[A-Z_]+\](?!\()/g;
+    let regex = /\{\{[A-Z\|_]+\}\}/g;
     let match = regex.exec(text);
     while (match != null) {
         placeholders.push(match[0]);
@@ -17,22 +17,35 @@ function getPlaceHolders(text: string) {
     return new Set(placeholders);
 }
 
-async function replacePlaceHolder(placeholder: string, body: string) {
+interface Replacement{
+    placeholder: string;
+    value: string;
+}
+
+const replacements:Replacement[] = [];
+
+async function replacePlaceHolder(placeholder: string) : Promise<Replacement> {
     // TODO: Add default values for placeholders
-    console.log(placeholder);
-    await vscode.window.showInputBox({
+    const replacement = await vscode.window.showInputBox({
         prompt: `Enter ${placeholder} replacement`
         }).then((value) => {
-        return body.replace(placeholder, value ? value: placeholder);
-    })
-}
+            if (value) { 
+                    return {
+                        placeholder: placeholder,
+                        value: value
+                    }
+                }
+            return {placeholder: placeholder, value: ""}
+        });
+    return replacement
+    }
 
 export async function activate(context: vscode.ExtensionContext) {
 
     console.log('Calling Add Code of Conduct');
 
     let add = vscode.commands.registerCommand('codeOfConduct.add', async () => {
-        const rootPath = vscode.workspace.rootPath;
+        const rootPath = vscode.workspace.rootPath; // TODO: Deprecated
         if (!rootPath) {
             return;
         }
@@ -44,26 +57,33 @@ export async function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        const template = await vscode.window.showQuickPick(manifest, {}).
+        var template = await vscode.window.showQuickPick(manifest, {}).
             then((item) => {
                 if (item) {
                 var msg = item?.body ? readFileSync(join(__dirname, item.body), 'utf8') : console.log("No item selected")
                 return msg;
             }
         });
+
         if (template) {
             const placeholders = getPlaceHolders(template);
-            var newFile = template
-            for (let placeholder of placeholders) {
-                newFile = await replacePlaceHolder(placeholder, template)
-            }
+            
+            const replacements:Array<Replacement> = []
 
-            writeFileSync(filePath, newFile, 'utf8');
-               vscode.workspace.openTextDocument(vscode.Uri.file(filePath))
+            for (let placeholder of placeholders) {
+                await replacements.push(await replacePlaceHolder(placeholder))
+            }
+            
+            for (let replacement of replacements) {
+                var reg = new RegExp(replacement.placeholder, 'g');
+                template = template.replace(reg, replacement.value);
+            }
+            writeFileSync(filePath, template, 'utf8');
+            vscode.workspace.openTextDocument(vscode.Uri.file(filePath))
                    .then((doc) => {
                        vscode.window.showTextDocument(doc);
                    })
-        }
+                }
     })
 
     context.subscriptions.push(add);
