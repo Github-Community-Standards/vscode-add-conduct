@@ -3,7 +3,13 @@ All notable changes to the "vscode-add-conduct" extension will be documented in 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [2022.8.1] - 2020-08-19
+## [Unreleased]
+### Added
+
+
+### Changed
+
+## [2022.8.2] - 2020-08-19
 ### Added
 - "Add Code of Conduct" now lets you pick from a selection of available Code of Conducts.
 - Added Stumptown Syndicate Code of Conduct as an option.
