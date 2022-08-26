@@ -3,7 +3,7 @@
     "displayName": "Add Code of Conduct",
     "description": "Add a Code of Conduct to your repository",
     "publisher": "kjaymiller",
-    "version": "2022.8.2",
+    "version": "2022.8.3",
     "engines": {
       "vscode": "^1.70.0"
     },
