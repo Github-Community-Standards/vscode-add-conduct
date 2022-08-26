@@ -5,7 +5,7 @@
 ## Code of Conduct
 A Code of Conduct is a set of rules for a group of people to follow when they interact with each other on behalf of a project, community, or event. Adding a Code of Conduct to your repo is a great way to show inclusivity for all contributors and provide clear guidelines for how to behave and how the rules will be enforced.
 
-As development continues and other options for Codes of Conduct are discovered, additional options may be provided.
+This extension will add a Code of Conduct to your repo. You can choose from a [selection of templates](/src/codesOfConduct/) and replace the placeholders with your own text.
 
 ## How to Add a Code of Conduct to Your Repo
 - Activate the Command Pallet
