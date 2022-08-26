@@ -34,7 +34,7 @@ You can set default values for a given placeholder by adding the value into your
 `codeOfConduct.defaultPlaceholders` is an array of objects with the properties `placeholder` and `replacement`. The `placeholder` property is the placeholder AS IT APPEARS IN THE TEMPLATE (BRACES INCLUDED).  `replacement` is the value that will be offered as a default in the template.
 
 ## Templates
-A list of the templates can be found in </src/codesofConduct> or you can view the list in </src/manifests.ts>. The templates are as-written with the exception of organizational specifics being generalized and being replaced and Attributtion being given to the original source.Placeholders being wrapped with double braces to conform to the extension's formatting.
+A list of the templates can be found in [/src/codesofConduct](/src/codesOfConduct/) or you can view the list in [/src/manifest.ts](src/manifest.ts). The templates are as-written with the exception of organizational specifics being generalized and being replaced and Attributtion being given to the original source.Placeholders being wrapped with double braces to conform to the extension's formatting.
 
 
 ## Inspiration:
