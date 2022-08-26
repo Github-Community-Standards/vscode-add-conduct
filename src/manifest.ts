@@ -19,6 +19,13 @@ const manifest:CustomQuickPickItem[] = [
         "version": "2.3",
         "body": "./codesOfConduct/citizen.md",
         "description": "Code of Conduct for Communities or Events"
+    },
+    {
+        "label": "Plone Code Of Conduct",
+        "detail": "http://plone.org/foundation/materials/foundation-resolutions/code-of-conduct",
+        "version": "0.0",
+        "body": "./codesOfConduct/plone.md",
+        "description": "Plone Foundation Code of Conduct"
     }
 ]
 
