@@ -9,7 +9,7 @@ import { Agent } from 'http';
 // TODO: Test matching variables
 function getPlaceHolders(text: string) {
     let placeholders = [];
-    let regex = /\{\{[A-Z\|_]+\}\}/g;
+    let regex = /\{\{[A-Z\|\_]+\}\}/g;
     let match = regex.exec(text);
     while (match != null) {
         placeholders.push(match[0]);
@@ -79,7 +79,8 @@ export async function activate(context: vscode.ExtensionContext) {
             }
             
             for (let replacement of replacements) {
-                var reg = new RegExp(replacement.placeholder, 'g');
+                const regValue:string = replacement.placeholder.replace(/\|/g, '\\|');
+                const reg = new RegExp(regValue, 'g');
                 template = template.replace(reg, replacement.replacement);
             }
 
