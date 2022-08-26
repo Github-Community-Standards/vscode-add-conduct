@@ -1,8 +1,3 @@
-> **Note**
-> The [original Repo](https://github.com/cg-cnu/vscode-add-conduct) is the starting point for the project. Ultimately, the goal is to add more features that distinguish the project from the original.
-> We will give back to the original Repo where it makes sense, but as updates have not happened in several year we have to assume the project is no longer maintained.
-
-
 ![Code of Conduct Icon](/icons/vscode-add-coc.png)
 
 # VS Code Add Code of Conduct
@@ -15,6 +10,10 @@ As development continues and other options for Codes of Conduct are discovered, 
 ## How to Add a Code of Conduct to Your Repo
 - Activate the Command Pallet
 - Select the `Add Code of Conduct` Command
+- Choose your Code of Conduct Template
+- Replace Placeholders in the Template
+
+![Add Code of Conduct](https://kjaymiller.azureedge.net/media/add_covenant-2022-8-2.gif)
 
 ## Settings
 
@@ -40,3 +39,4 @@ A list of the templates can be found in </src/codesofConduct> or you can view th
 
 ## Inspiration:
 * [original project](https://github.com/cg-cnu/vscode-add-conduct) by [@cg_cnu](https://github.com/cg-cnu) 
+
