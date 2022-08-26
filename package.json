@@ -43,6 +43,32 @@
                 "command": "codeOfConduct.add",
                 "title": "Add Code of Conduct to Your Project"
             }
+        ],
+        "configuration":[
+          {
+            "title": "Code of Conduct",
+            "properties": {
+              "codeOfConduct.defaultPlaceholders": {
+                "type": "array",
+                "description": "Default Variables for Code of Conduct Replacements",
+                "items": {
+                  "type": "object",
+                  "title": "replacements",
+                  "properties": {
+                    "placeholder": {
+                      "type": "string",
+                      "description": " Placeholder to be replaced - INCLUDE double braces. ex: {{PLACEHOLDER}}"
+                      },
+                    "replacement": {
+                      "type": "string",
+                      "description": "Text to replace the placeholder with"
+                    }
+                  }
+                },
+                "default": []
+              }
+            }
+          }
         ]
     },
     "scripts": {

@@ -4,8 +4,9 @@ import manifest from './manifest';
 
 import { existsSync, writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { Agent } from 'http';
 
-
+// TODO: Test matching variables
 function getPlaceHolders(text: string) {
     let placeholders = [];
     let regex = /\{\{[A-Z\|_]+\}\}/g;
@@ -19,33 +20,33 @@ function getPlaceHolders(text: string) {
 
 interface Replacement{
     placeholder: string;
-    value: string;
+    replacement: string;
 }
 
 const replacements:Replacement[] = [];
 
-async function replacePlaceHolder(placeholder: string) : Promise<Replacement> {
-    // TODO: Add default values for placeholders
+async function replacePlaceHolder(placeholder: string, replaceValue: string) : Promise<Replacement> {
+    // TODO: Get default values from settings
     const replacement = await vscode.window.showInputBox({
-        prompt: `Enter ${placeholder} replacement`
+        prompt: `Enter ${placeholder} replacement`,
+        value: replaceValue
         }).then((value) => {
             if (value) { 
                     return {
                         placeholder: placeholder,
-                        value: value
+                        replacement: value
                     }
                 }
-            return {placeholder: placeholder, value: ""}
+            return {placeholder: placeholder, replacement: ""}
         });
     return replacement
     }
 
 export async function activate(context: vscode.ExtensionContext) {
-
     console.log('Calling Add Code of Conduct');
 
     let add = vscode.commands.registerCommand('codeOfConduct.add', async () => {
-        const rootPath = vscode.workspace.rootPath; // TODO: Deprecated
+        const rootPath = vscode.workspace.rootPath; // TODO: Update as workspace.rootPath is deprecated?
         if (!rootPath) {
             return;
         }
@@ -71,13 +72,17 @@ export async function activate(context: vscode.ExtensionContext) {
             const replacements:Array<Replacement> = []
 
             for (let placeholder of placeholders) {
-                await replacements.push(await replacePlaceHolder(placeholder))
+                // TODO: ADD Check Config for default values
+                const defaultPlaceholders:Array<Replacement> = vscode.workspace.getConfiguration('codeOfConduct').get('defaultPlaceholders');
+                const defaultPlaceholder = defaultPlaceholders.find(p => p.placeholder === placeholder)?.replacement ?? placeholder
+                await replacements.push(await replacePlaceHolder(placeholder, defaultPlaceholder))
             }
             
             for (let replacement of replacements) {
                 var reg = new RegExp(replacement.placeholder, 'g');
-                template = template.replace(reg, replacement.value);
+                template = template.replace(reg, replacement.replacement);
             }
+
             writeFileSync(filePath, template, 'utf8');
             vscode.workspace.openTextDocument(vscode.Uri.file(filePath))
                    .then((doc) => {
@@ -88,27 +93,3 @@ export async function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(add);
     }
-
-
-/*       const email = execSync("git config --global user.email").toString().trim();
-       vscode.window.showInputBox({
-           ignoreFocusOut: true,
-           placeHolder: "Enter your email address",
-           prompt: "Enter your email address ✉️",
-           value: email
-       })
-           .then(email => {
-               if (!email) {
-                   return;
-               }
-
-               let conduct = code_of_conduct;
-               conduct = conduct.replace('[INSERT EMAIL ADDRESS]', email);
-               writeFileSync(filePath, conduct, 'utf8');
-               vscode.workspace.openTextDocument(vscode.Uri.file(filePath))
-                   .then((doc) => {
-                       vscode.window.showTextDocument(doc);
-                   })
-           });
-   });
-*/
