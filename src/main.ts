@@ -73,7 +73,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
             for (let placeholder of placeholders) {
                 // TODO: ADD Check Config for default values
-                const defaultPlaceholders:Array<Replacement> = vscode.workspace.getConfiguration('codeOfConduct').get('defaultPlaceholders');
+                const defaultPlaceholders:Array<Replacement> = vscode.workspace.getConfiguration('codeOfConduct').get('defaultPlaceholders') ?? [];
                 const defaultPlaceholder = defaultPlaceholders.find(p => p.placeholder === placeholder)?.replacement ?? placeholder
                 await replacements.push(await replacePlaceHolder(placeholder, defaultPlaceholder))
             }
