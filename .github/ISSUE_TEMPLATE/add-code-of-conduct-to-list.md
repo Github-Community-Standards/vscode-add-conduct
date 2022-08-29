@@ -1,6 +1,6 @@
 ---
 name: Add Code of Conduct to List
-about: Describe this issue template's purpose here.
+about: Use this template to add a new Code of Conduct to the Manifest
 title: Add <CODE OF CONDUCT>
 labels: add code of conduct, good first issue
 assignees: ''
