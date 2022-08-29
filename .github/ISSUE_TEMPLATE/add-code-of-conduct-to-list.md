@@ -7,11 +7,10 @@ assignees: ''
 
 ---
 
----
-name: <CODE OF CONDUCT>
-url:  <URL OF CODE OF CONDUCT>
-version: <VERSION NUMBER>
----
+* name: <CODE OF CONDUCT> 
+* url:  <URL OF CODE OF CONDUCT> 
+* version: <VERSION NUMBER> 
+
 
 - [ ] Original or Unique Modification
 - [ ] Licensed with a Creative Commons or License that allows for modifications.
