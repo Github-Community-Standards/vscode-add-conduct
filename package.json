@@ -74,11 +74,11 @@
     },
     "scripts": {
       "vscode:prepublish": "npm run compile",
-      "compile": "tsc -p ./ && cp -R ./src/codesOfConduct ./out/codesOfConduct",
+      "compile": "tsc -p ./ && cp -R ./src/codesOfConduct ./out/",
       "watch": "tsc -watch -p ./",
-      "pretest": "npm run compile && npm run lint",
       "lint": "eslint src --ext ts",
-      "test": "node ./out/test/runTest.js"
+      "pretest": "npm run compile",
+	  	"test": "node ./out/tests/runTest.js"
     },
     "devDependencies": {
       "@types/vscode": "^1.70.0",
