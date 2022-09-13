@@ -5,42 +5,11 @@ import manifest from './manifest';
 import { existsSync, writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { Agent } from 'http';
-
-// TODO: Test matching variables
-function getPlaceHolders(text: string) {
-    let placeholders = [];
-    let regex = /\{\{[A-Z\|\_]+\}\}/g;
-    let match = regex.exec(text);
-    while (match != null) {
-        placeholders.push(match[0]);
-        match = regex.exec(text);
-    }
-    return new Set(placeholders);
-}
-
-interface Replacement{
-    placeholder: string;
-    replacement: string;
-}
+import { getPlaceHolders } from './getPlaceHolders';
+import { Replacement } from './Replacement';
+import { replacePlaceHolder } from './replacePlaceHolder';
 
 const replacements:Replacement[] = [];
-
-async function replacePlaceHolder(placeholder: string, replaceValue: string) : Promise<Replacement> {
-    // TODO: Get default values from settings
-    const replacement = await vscode.window.showInputBox({
-        prompt: `Enter ${placeholder} replacement`,
-        value: replaceValue
-        }).then((value) => {
-            if (value) { 
-                    return {
-                        placeholder: placeholder,
-                        replacement: value
-                    }
-                }
-            return {placeholder: placeholder, replacement: ""}
-        });
-    return replacement
-    }
 
 export async function activate(context: vscode.ExtensionContext) {
     console.log('Calling Add Code of Conduct');
@@ -94,3 +63,4 @@ export async function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(add);
     }
+
